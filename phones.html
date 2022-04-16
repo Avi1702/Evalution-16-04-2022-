@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phones</title>
+    <style>
+        body{
+          
+            backface-visibility: hidden;
+         
+        }
+#product{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,250px);
+    gap: 20px;
+    margin-top: 100px;
+    
+
+}
+h1{
+    text-align: center;
+}
+
+.box{
+ 
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+}
+img{
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    
+
+}
+button:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#navbar{
+    width: 70%;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    /* background-image:url("https://cdn.hipwallpaper.com/i/71/44/sLrHqS.jpg"); */
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    
+}
+#navbar a{
+    text-decoration: none;
+    
+}
+.navbutton{
+    width: 15%;
+    background-color: coral;
+    /* background-image:url("https://cdn.hipwallpaper.com/i/71/44/sLrHqS.jpg"); */
+    padding: 10px;
+ border-radius: 10px;
+ margin-top: 10px;
+ margin-bottom: 10px;
+ 
+}
+.navbutton:hover{
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <button class="navbutton">  <a href="Phones.html">Mobile Phones</a></button>
+       <button class="navbutton"n>  Accessory</button>
+        <button class="navbutton"><a href="AddToCart.html">Cart</a></button>
+      </div>
+
+<select id="sort">
+    <option >sort by price</option>
+    <option>Low to High</option>
+    <option>High to Low</option>
+</select>
+<select id="filter">
+    <option value="">sort by Rating</option>
+    <option>Low to High</option>
+    <option>High to Low</option>
+</select>
+    <div id="product"></div>
+  
+</body>
+</html>
+
+<script>
+   
+let product=[
+    {
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"99"
+    },
+    
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"100"
+},
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"200"
+},
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"500"
+},
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"1000"
+}
+,
+    
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"100"
+},
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"200"
+},
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"500"
+},
+{
+    title:"i-phone",
+    image:"https://isource.com/wp-content/uploads/2013/09/apple-iphone-5c.jpg",
+    price:"1000"
+}
+]
+function display(){
+product.forEach(e =>{
+    
+let box=document.createElement("div")
+box.setAttribute("class","box")
+
+let image=document.createElement("img")
+image.setAttribute("src",e.image)
+
+let title=document.createElement("p")
+title.innerText=e.title;
+
+let price=document.createElement("p")
+price.innerText=e.price;
+
+var btn=document.createElement("button")
+btn.innerText="ADD TO CART";
+btn.addEventListener("click",function(){
+    alert("Item Added To Cart!")
+    let cart
+    if(localStorage.getItem("cart")===null){
+        cart=[]
+    }else{
+        cart=JSON.parse(localStorage.getItem("cart"))
+    }
+    cart.push(e)
+    localStorage.setItem("cart",JSON.stringify(cart))
+})
+
+box.append(image,title,price,btn)
+
+document.querySelector("#product").append(box)
+});
+}
+display()
+let sort=document.getElementById("sort").value
+let filter=document.getElementById("sort").value
+
+if(sort===Ascending){
+    product.sort((a,b)=>a-b)
+display()
+}
+// function AddToCart(product){
+//     for(i=0;i<product.length;i++){
+//     console.log(product[i])
+//     }
+
+
+
+</script>
